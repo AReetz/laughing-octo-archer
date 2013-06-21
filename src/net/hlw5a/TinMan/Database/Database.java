@@ -54,7 +54,17 @@ public class Database {
 		try { 
 			Class.forName("org.sqlite.JDBC");
 			try {
-				String fileName = System.getProperty("user.home") + "/Library/Application Support/Mendeley Desktop/";
+				String os = System.getProperty("os.name");
+				String fileName;
+				if (os.contains("Windows")) {
+					fileName = System.getProperty("user.home") + "\\AppData\\Local\\Mendeley Ltd\\Mendeley Desktop";
+				}
+				else if (os.contains("MacOSX")) {
+					fileName = System.getProperty("user.home") + "/Library/Application Support/Mendeley Desktop/";
+				}
+				else {
+					fileName = "";
+				}
 				fileName = new File(fileName).listFiles(new FilenameFilter() {
 					public boolean accept(File arg0, String arg1) { return arg1.endsWith("@www.mendeley.com.sqlite"); }
 				})[0].getAbsolutePath();
