@@ -59,7 +59,7 @@ public class Database {
 				if (os.contains("Windows")) {
 					fileName = System.getProperty("user.home") + "\\AppData\\Local\\Mendeley Ltd\\Mendeley Desktop";
 				}
-				else if (os.contains("MacOSX")) {
+				else if (os.equals("Mac OS X")) {
 					fileName = System.getProperty("user.home") + "/Library/Application Support/Mendeley Desktop/";
 				}
 				else {
