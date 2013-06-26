@@ -1,4 +1,4 @@
-package net.hlw5a.TinMan.UI;
+package net.hlw5a.TinMan.UI.DocumentDetails;
 
 import java.awt.Component;
 import java.awt.Cursor;
@@ -10,34 +10,32 @@ import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.Iterator;
 
-import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
 
-import net.hlw5a.TinMan.Documents.ConferenceProceedings;
-import net.hlw5a.TinMan.People.Contributor;
+import net.hlw5a.TinMan.Contributor.Person;
+import net.hlw5a.TinMan.Documents.JournalArticle;
+import net.hlw5a.TinMan.UI.Styles;
 
-public class TMDetailProceedings extends JPanel {
+public class TMDetailJournalArticle extends JPanel {
 
-	private static final long serialVersionUID = 8053584747059848359L;
-	
+	private static final long serialVersionUID = 2411242446747736356L;
+
 	private static String newLine = System.getProperty("line.separator");
 	
 	private JTextArea title;
 	private JTextArea authors;
 	private JTextArea publication;
 	private JTextArea pages;
-	private JTextArea publisher;
-	private JTextArea address;
+	private JTextArea volume;
+	private JTextArea issue;
 	private JTextArea year;
 	private JTextArea doi;
 	
 	private URL url;
 	
-	public TMDetailProceedings() {
+	public TMDetailJournalArticle() {
 		super(new GridBagLayout());
 		
 		title = createTextArea("[title]");
@@ -54,11 +52,11 @@ public class TMDetailProceedings extends JPanel {
 		pages = createTextArea("[pages]");
 		JLabel pagesLabel = createLabel(pages, "Pages:");
 		
-		publisher = createTextArea("[publisher]");
-		JLabel publisherLabel = createLabel(publisher, "Publisher:");
+		volume = createTextArea("[publisher]");
+		JLabel volumeLabel = createLabel(volume, "Volume:");
 		
-		address = createTextArea("[address]");
-		JLabel addressLabel = createLabel(address, "City:");
+		issue = createTextArea("[address]");
+		JLabel issueLabel = createLabel(issue, "Issue:");
 		
 		year = createTextArea("[year]");
 		JLabel yearLabel = createLabel(year, "Year:");
@@ -119,17 +117,17 @@ public class TMDetailProceedings extends JPanel {
 		c.gridx = 0;
 		c.gridy = 3;
 		c.gridwidth = 1;
-		this.add(publisherLabel, c);
+		this.add(volumeLabel, c);
 		c.gridx = 1;
 		c.gridwidth = 1;
-		this.add(publisher, c);
+		this.add(volume, c);
 		
 		c.gridx = 2;
 		c.gridwidth = 1;
-		this.add(addressLabel, c);
+		this.add(issueLabel, c);
 		c.gridx = 3;
 		c.gridwidth = 1;
-		this.add(address, c);
+		this.add(issue, c);
 		
 		c.gridx = 4;
 		c.gridwidth = 1;
@@ -147,13 +145,13 @@ public class TMDetailProceedings extends JPanel {
 		this.add(doi, c);
 	}
 	
-	public void setDocument(ConferenceProceedings document) {
+	public void setDocument(JournalArticle document) {
 		title.setText(document.getTitle());
 		authors.setText(convertContributors(document.getAuthors()));
 		publication.setText(document.getPublication());
 		pages.setText(document.getPages());
-		publisher.setText(document.getPublisher().getName());
-		address.setText(document.getPublisher().getAddress().toString());
+		volume.setText(document.getVolume());
+		issue.setText(document.getIssue());
 		year.setText(String.valueOf(document.getYear()));
 		doi.setText(document.getDOI().getDoi());
 		url = document.getDOI().getUrl();
@@ -175,10 +173,10 @@ public class TMDetailProceedings extends JPanel {
 		return label;
 	}
 	
-	private String convertContributors(Iterator<Contributor> contributors) {
+	private String convertContributors(Iterator<Person> contributors) {
 		StringBuilder result = new StringBuilder();
 		while (contributors.hasNext()) {
-			Contributor cont = contributors.next();
+			Person cont = contributors.next();
 			result.append(cont.getLastName() + ", " + cont.getFirstNames());
 			if (contributors.hasNext()) result.append(newLine);
 		}

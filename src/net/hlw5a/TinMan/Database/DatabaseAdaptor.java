@@ -3,10 +3,10 @@ package net.hlw5a.TinMan.Database;
 import java.util.Iterator;
 import java.util.Vector;
 
+import net.hlw5a.TinMan.Contributor.Person;
 import net.hlw5a.TinMan.Documents.ConferenceProceedings;
-import net.hlw5a.TinMan.Documents.Document;
+import net.hlw5a.TinMan.Documents.AbstractDocument;
 import net.hlw5a.TinMan.Documents.JournalArticle;
-import net.hlw5a.TinMan.People.Contributor;
 
 public class DatabaseAdaptor {
 
@@ -30,9 +30,9 @@ public class DatabaseAdaptor {
 	
 	public static Vector<Vector<Object>> getData() {
 		Vector<Vector<Object>> data = new Vector<Vector<Object>>();
-		Iterator<Document> iter = Database.getInstance().getAllDocuments(); 
+		Iterator<AbstractDocument> iter = Database.getInstance().getAllDocuments(); 
 		while (iter.hasNext()) {
-			Document doc = iter.next();
+			AbstractDocument doc = iter.next();
 			Vector<Object> entry = new Vector<Object>();
 			if (doc.getClass() == ConferenceProceedings.class) {
 				ConferenceProceedings cp = (ConferenceProceedings)doc;
@@ -56,10 +56,10 @@ public class DatabaseAdaptor {
 		return data;
 	}
 	
-	private static String convertContributors(Iterator<Contributor> contributors) {
+	private static String convertContributors(Iterator<Person> contributors) {
 		StringBuilder result = new StringBuilder();
 		while (contributors.hasNext()) {
-			Contributor cont = contributors.next();
+			Person cont = contributors.next();
 			result.append(cont.getLastName() + ", " + cont.getFirstNames());
 			if (contributors.hasNext()) result.append("; ");
 		}

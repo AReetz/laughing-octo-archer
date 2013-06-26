@@ -1,4 +1,4 @@
-package net.hlw5a.TinMan.People;
+package net.hlw5a.TinMan.Contributor;
 
 public class Publisher {
 
@@ -10,7 +10,7 @@ public class Publisher {
 
     public Publisher(String Name, String Address) {
         this.name = Name;
-        this.address = net.hlw5a.TinMan.People.Address.Create(Address);
+        this.address = net.hlw5a.TinMan.Contributor.Address.Create(Address);
     }
     
 	@Override

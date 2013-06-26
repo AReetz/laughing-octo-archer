@@ -3,13 +3,21 @@ package net.hlw5a.TinMan.UI;
 import javax.swing.JPanel;
 
 import net.hlw5a.TinMan.Documents.ConferenceProceedings;
-import net.hlw5a.TinMan.Documents.Document;
+import net.hlw5a.TinMan.Documents.AbstractDocument;
+import net.hlw5a.TinMan.Documents.JournalArticle;
+import net.hlw5a.TinMan.UI.DocumentDetails.TMDetailJournalArticle;
+import net.hlw5a.TinMan.UI.DocumentDetails.TMDetailProceedings;
 
 public class TMDetailFactory {
 	
 	private static TMDetailProceedings conferenceProceedings = new TMDetailProceedings();
+	private static TMDetailJournalArticle journalArticle = new TMDetailJournalArticle();
 	
-	public static JPanel createDocumentDetails(Document document) {
+	private static JPanel lastPanel;
+	
+	public static JPanel getLastPanel() { return lastPanel; }
+	
+	public static JPanel createDocumentDetails(AbstractDocument document) {
 		switch (document.getType()) {
 		case Book:
 			break;
@@ -17,15 +25,16 @@ public class TMDetailFactory {
 			break;
 		case ComputerProgram:
 			break;
-		case ConferenceProceedings:
+		case ConferenceProceedings:			
 			conferenceProceedings.setDocument((ConferenceProceedings)document);
-			return conferenceProceedings;
+			lastPanel = conferenceProceedings;
 		case EncyclopaediaArticle:
 			break;
 		case Generic:
 			break;
 		case JournalArticle:
-			break;
+			journalArticle.setDocument((JournalArticle)document);
+			lastPanel = journalArticle;
 		case MagazineArticle:
 			break;
 		case Patent:
@@ -37,6 +46,6 @@ public class TMDetailFactory {
 		case WebPage:
 			break;
 		}
-		return null;
+		return lastPanel;
 	}
 }

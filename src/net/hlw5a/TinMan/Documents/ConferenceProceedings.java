@@ -3,19 +3,19 @@ package net.hlw5a.TinMan.Documents;
 import java.util.Iterator;
 import java.util.Map;
 
+import net.hlw5a.TinMan.Contributor.Person;
+import net.hlw5a.TinMan.Contributor.Publisher;
 import net.hlw5a.TinMan.Database.DBBool;
 import net.hlw5a.TinMan.IDs.DOI;
 import net.hlw5a.TinMan.IDs.ISBN;
-import net.hlw5a.TinMan.People.Contributor;
-import net.hlw5a.TinMan.People.Publisher;
 
-public class ConferenceProceedings extends Document {
+public class ConferenceProceedings extends AbstractDocument {
 
     // Mendeley fields
     public DBBool isFavorite() { return favorite; }
     public String getNote() { return note; }
     // people fields
-    public Iterator<Contributor> getAuthors() { return authors.iterator(); }
+    public Iterator<Person> getAuthors() { return authors.iterator(); }
     public Publisher getPublisher() { return publisher; }
     // date fields
     public Integer getYear() { return year; }

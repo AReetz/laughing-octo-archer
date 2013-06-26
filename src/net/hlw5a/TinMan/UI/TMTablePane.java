@@ -14,6 +14,7 @@ public class TMTablePane extends JScrollPane {
 	public TMTablePane(TinMan tinMan, TMTableModel tableModel, TableRowSorter<TMTableModel> tableSorter) {
 		final TMTableCellRenderer renderer = new TMTableCellRenderer();
 		table = new JTable(tableModel) {
+			private static final long serialVersionUID = -158794865791101765L;
 			public TableCellRenderer getCellRenderer(int row, int column) {
 		        return renderer;
 		    }

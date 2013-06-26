@@ -14,19 +14,19 @@ import java.util.Iterator;
 import java.util.Map;
 
 import net.hlw5a.TinMan.ReturningHashMap;
-import net.hlw5a.TinMan.Documents.Document;
+import net.hlw5a.TinMan.Contributor.Contribution;
+import net.hlw5a.TinMan.Contributor.Person;
+import net.hlw5a.TinMan.Contributor.Publisher;
+import net.hlw5a.TinMan.Documents.AbstractDocument;
 import net.hlw5a.TinMan.Documents.DocumentFactory;
-import net.hlw5a.TinMan.People.Contribution;
-import net.hlw5a.TinMan.People.Contributor;
-import net.hlw5a.TinMan.People.Publisher;
 
 public class Database {
 	
 	private static volatile Database instance = null;
 
 	private static Map<String, Publisher> publishers = new ReturningHashMap<String, Publisher>();
-	private static Map<String, Contributor> contributors = new ReturningHashMap<String, Contributor>();
-	private static Map<Integer, Document> documents = new ReturningHashMap<Integer, Document>();
+	private static Map<String, Person> contributors = new ReturningHashMap<String, Person>();
+	private static Map<Integer, AbstractDocument> documents = new ReturningHashMap<Integer, AbstractDocument>();
 	
 	public static Database getInstance() {
 		if (instance == null) {
@@ -43,12 +43,12 @@ public class Database {
 	public Publisher addPublisher(String key, Publisher value) { return publishers.put(key, value); }
 	public Publisher getPublisher(String key) { return publishers.get(key); }
 	
-	public Contributor addContributor(String key, Contributor value) { return contributors.put(key, value); }
-	public Contributor getContributor(String key) { return contributors.get(key); }
+	public Person addContributor(String key, Person value) { return contributors.put(key, value); }
+	public Person getContributor(String key) { return contributors.get(key); }
 	
-	public Document addDocument(Integer key, Document value) { return documents.put(key, value); }
-	public Document getDocument(Integer key) { return documents.get(key); }
-	public Iterator<Document> getAllDocuments() { return documents.values().iterator(); }
+	public AbstractDocument addDocument(Integer key, AbstractDocument value) { return documents.put(key, value); }
+	public AbstractDocument getDocument(Integer key) { return documents.get(key); }
+	public Iterator<AbstractDocument> getAllDocuments() { return documents.values().iterator(); }
 		
 	private void loadDatabase() {
 		try { 
@@ -95,7 +95,7 @@ public class Database {
 									break;
 								}
 							}
-							Document doc = DocumentFactory.Create(values);
+							AbstractDocument doc = DocumentFactory.Create(values);
 							if (doc != null) documents.put(doc.getId(), doc);
 						}
 					} catch (SQLException e) {
@@ -125,14 +125,14 @@ public class Database {
 								}
 							}
 							
-							Contributor contributor = new Contributor(values);
+							Person contributor = new Person(values);
 							contributor = contributors.put(contributor.toString(), contributor);
 							
 							/*
 							 * match contributor and document
 							 */
 							Contribution contribution = Contribution.valueOf((String)values.get("contribution"));
-							Document document = documents.get((Integer)values.get("documentId"));
+							AbstractDocument document = documents.get((Integer)values.get("documentId"));
 		                    if (document != null && contribution == Contribution.DocumentAuthor) {
 		                    	contributor.addAuthored(document);
 		                    	document.addAuthor(contributor);

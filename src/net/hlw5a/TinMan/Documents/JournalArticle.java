@@ -3,17 +3,17 @@ package net.hlw5a.TinMan.Documents;
 import java.util.Iterator;
 import java.util.Map;
 
+import net.hlw5a.TinMan.Contributor.Person;
 import net.hlw5a.TinMan.Database.DBBool;
 import net.hlw5a.TinMan.IDs.DOI;
-import net.hlw5a.TinMan.People.Contributor;
 
-public class JournalArticle  extends Document {
+public class JournalArticle  extends AbstractDocument {
 
 	// Mendeley fields
     public DBBool isFavorite() { return favorite; }
     public String getNote() { return note; }
     // people fields
-    public Iterator<Contributor> getAuthors() { return authors.iterator(); }
+    public Iterator<Person> getAuthors() { return authors.iterator(); }
     // date fields
     public Integer getYear() { return year; }
     // title fields
