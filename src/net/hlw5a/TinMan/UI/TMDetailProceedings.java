@@ -10,12 +10,9 @@ import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.Iterator;
 
-import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
 
 import net.hlw5a.TinMan.Documents.ConferenceProceedings;
 import net.hlw5a.TinMan.People.Contributor;
