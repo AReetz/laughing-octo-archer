@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import net.hlw5a.TinMan.Contributor.Person;
+import net.hlw5a.TinMan.Contributor.IPerson;
 import net.hlw5a.TinMan.Documents.ConferenceProceedings;
 import net.hlw5a.TinMan.UI.Styles;
 
@@ -173,10 +173,10 @@ public class TMDetailProceedings extends JPanel {
 		return label;
 	}
 	
-	private String convertContributors(Iterator<Person> contributors) {
+	private String convertContributors(Iterator<IPerson> contributors) {
 		StringBuilder result = new StringBuilder();
 		while (contributors.hasNext()) {
-			Person cont = contributors.next();
+			IPerson cont = contributors.next();
 			result.append(cont.getLastName() + ", " + cont.getFirstNames());
 			if (contributors.hasNext()) result.append(newLine);
 		}

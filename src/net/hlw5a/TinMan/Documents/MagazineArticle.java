@@ -5,45 +5,44 @@ import java.util.Map;
 
 import net.hlw5a.TinMan.Contributor.IPerson;
 import net.hlw5a.TinMan.Contributor.IPublisher;
-import net.hlw5a.TinMan.IDs.ISBN;
+import net.hlw5a.TinMan.IDs.ISSN;
 
-public class Book extends AbstractDocument {
+public class MagazineArticle extends AbstractDocument {
 
 	// contributor fields
 	@Override
 	public Iterator<IPerson> getAuthors() { return authors.iterator(); }
     @Override
-	public Iterator<IPerson> getEditors() { return editors.iterator(); }
+	public Iterator<IPerson> getEditors() { throw new UnsupportedOperationException("getEditors() not supported in " + this.getClass().getName()); }
     @Override
-    public IPublisher getPublisher() { return publisher; }
+    public IPublisher getPublisher() { throw new UnsupportedOperationException("getPublisher() not supported in " + this.getClass().getName()); }
     
     // date fields
     @Override
     public Integer getDay() { throw new UnsupportedOperationException("getDay() not supported in " + this.getClass().getName()); }
     @Override
-    public Integer getMonth() { throw new UnsupportedOperationException("getMonth() not supported in " + this.getClass().getName()); }
+    public Integer getMonth() { return month; }
     @Override
     public Integer getYear() { return year; }
 
     // title fields
     @Override
-    public String getPublication() { return title; }
+    public String getPublication() { return publication; }
     @Override
-	public String getVolume() { throw new UnsupportedOperationException("getVolume() not supported in " + this.getClass().getName()); }    
+	public String getVolume() { throw new UnsupportedOperationException("getVolume() not supported in " + this.getClass().getName()); }
     @Override
 	public String getIssue() { throw new UnsupportedOperationException("getIssue() not supported in " + this.getClass().getName()); }
     @Override
-	public String getEdition() { return edition; }
+	public String getEdition() { throw new UnsupportedOperationException("getEdition() not supported in " + this.getClass().getName()); }
     @Override
     public String getTitle() { return title; }
     @Override
     public String getPages() { return pages; }
     
     // id fields
-    public ISBN getISBN() { return isbn; }
-
-    public Book(Map<String, Object> Values)  {
-    	super(Values);
-    }
-
+    public ISSN getISSN() { return issn; }
+    
+	public MagazineArticle(Map<String, Object> Values) {
+		super(Values);
+	}
 }

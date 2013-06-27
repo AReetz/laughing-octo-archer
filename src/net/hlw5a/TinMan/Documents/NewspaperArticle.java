@@ -5,12 +5,11 @@ import java.util.Map;
 
 import net.hlw5a.TinMan.Contributor.IPerson;
 import net.hlw5a.TinMan.Contributor.IPublisher;
-import net.hlw5a.TinMan.IDs.DOI;
 import net.hlw5a.TinMan.IDs.ISSN;
 
-public class JournalArticle extends AbstractDocument {
+public class NewspaperArticle extends AbstractDocument {
 
-    // contributor fields
+	// contributor fields
 	@Override
 	public Iterator<IPerson> getAuthors() { return authors.iterator(); }
     @Override
@@ -20,9 +19,9 @@ public class JournalArticle extends AbstractDocument {
     
     // date fields
     @Override
-    public Integer getDay() { throw new UnsupportedOperationException("getDay() not supported in " + this.getClass().getName()); }
+    public Integer getDay() { return day; }
     @Override
-    public Integer getMonth() { throw new UnsupportedOperationException("getMonth() not supported in " + this.getClass().getName()); }
+    public Integer getMonth() { return month; }
     @Override
     public Integer getYear() { return year; }
 
@@ -30,9 +29,9 @@ public class JournalArticle extends AbstractDocument {
     @Override
     public String getPublication() { return publication; }
     @Override
-	public String getVolume() { return volume; }
+	public String getVolume() { throw new UnsupportedOperationException("getVolume() not supported in " + this.getClass().getName()); }
     @Override
-	public String getIssue() { return issue; }
+	public String getIssue() { throw new UnsupportedOperationException("getIssue() not supported in " + this.getClass().getName()); }
     @Override
 	public String getEdition() { throw new UnsupportedOperationException("getEdition() not supported in " + this.getClass().getName()); }
     @Override
@@ -41,10 +40,9 @@ public class JournalArticle extends AbstractDocument {
     public String getPages() { return pages; }
     
     // id fields
-    public DOI getDOI() { return doi; }
     public ISSN getISSN() { return issn; }
     
-	public JournalArticle(Map<String, Object> Values) {
+	public NewspaperArticle(Map<String, Object> Values) {
 		super(Values);
 	}
 }

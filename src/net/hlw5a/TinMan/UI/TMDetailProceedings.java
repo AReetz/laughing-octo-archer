@@ -1,4 +1,4 @@
-package net.hlw5a.TinMan.UI.DocumentDetails;
+package net.hlw5a.TinMan.UI;
 
 import java.awt.Component;
 import java.awt.Cursor;
@@ -15,27 +15,26 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import net.hlw5a.TinMan.Contributor.IPerson;
-import net.hlw5a.TinMan.Documents.JournalArticle;
-import net.hlw5a.TinMan.UI.Styles;
+import net.hlw5a.TinMan.Documents.ConferenceProceedings;
 
-public class TMDetailJournalArticle extends JPanel {
+public class TMDetailProceedings extends JPanel {
 
-	private static final long serialVersionUID = 2411242446747736356L;
-
+	private static final long serialVersionUID = 8053584747059848359L;
+	
 	private static String newLine = System.getProperty("line.separator");
 	
 	private JTextArea title;
 	private JTextArea authors;
 	private JTextArea publication;
 	private JTextArea pages;
-	private JTextArea volume;
-	private JTextArea issue;
+	private JTextArea publisher;
+	private JTextArea address;
 	private JTextArea year;
 	private JTextArea doi;
 	
 	private URL url;
 	
-	public TMDetailJournalArticle() {
+	public TMDetailProceedings() {
 		super(new GridBagLayout());
 		
 		title = createTextArea("[title]");
@@ -52,11 +51,11 @@ public class TMDetailJournalArticle extends JPanel {
 		pages = createTextArea("[pages]");
 		JLabel pagesLabel = createLabel(pages, "Pages:");
 		
-		volume = createTextArea("[publisher]");
-		JLabel volumeLabel = createLabel(volume, "Volume:");
+		publisher = createTextArea("[publisher]");
+		JLabel publisherLabel = createLabel(publisher, "Publisher:");
 		
-		issue = createTextArea("[address]");
-		JLabel issueLabel = createLabel(issue, "Issue:");
+		address = createTextArea("[address]");
+		JLabel addressLabel = createLabel(address, "City:");
 		
 		year = createTextArea("[year]");
 		JLabel yearLabel = createLabel(year, "Year:");
@@ -117,17 +116,17 @@ public class TMDetailJournalArticle extends JPanel {
 		c.gridx = 0;
 		c.gridy = 3;
 		c.gridwidth = 1;
-		this.add(volumeLabel, c);
+		this.add(publisherLabel, c);
 		c.gridx = 1;
 		c.gridwidth = 1;
-		this.add(volume, c);
+		this.add(publisher, c);
 		
 		c.gridx = 2;
 		c.gridwidth = 1;
-		this.add(issueLabel, c);
+		this.add(addressLabel, c);
 		c.gridx = 3;
 		c.gridwidth = 1;
-		this.add(issue, c);
+		this.add(address, c);
 		
 		c.gridx = 4;
 		c.gridwidth = 1;
@@ -145,13 +144,13 @@ public class TMDetailJournalArticle extends JPanel {
 		this.add(doi, c);
 	}
 	
-	public void setDocument(JournalArticle document) {
+	public void setDocument(ConferenceProceedings document) {
 		title.setText(document.getTitle());
 		authors.setText(convertContributors(document.getAuthors()));
 		publication.setText(document.getPublication());
 		pages.setText(document.getPages());
-		volume.setText(document.getVolume());
-		issue.setText(document.getIssue());
+		publisher.setText(document.getPublisher().getName());
+		address.setText(document.getPublisher().getAddress().toString());
 		year.setText(String.valueOf(document.getYear()));
 		doi.setText(document.getDOI().getDoi());
 		url = document.getDOI().getUrl();

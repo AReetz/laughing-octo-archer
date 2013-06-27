@@ -19,8 +19,8 @@ import javax.swing.table.TableRowSorter;
 
 import net.hlw5a.TinMan.Citations.ICitation;
 import net.hlw5a.TinMan.Database.Database;
-import net.hlw5a.TinMan.Documents.AbstractDocument;
-import net.hlw5a.TinMap.PlugIn.CitationLoader;
+import net.hlw5a.TinMan.Documents.IDocument;
+import net.hlw5a.TinMan.PlugIn.CitationLoader;
 
 public class TinMan extends JPanel implements Runnable, ListSelectionListener {
 
@@ -33,12 +33,8 @@ public class TinMan extends JPanel implements Runnable, ListSelectionListener {
 	@Override
 	public void run() {
 		
-		try {
-			URL[] urls = new URL[] { new URL("file:///Users/Adrian/Documents/Source Code/laughing-octo-archer/bin/net/hlw5a/TinMan/Citations/") };
-			CitationLoader.Load(urls);
-		} catch (MalformedURLException e1) {
-			e1.printStackTrace();
-		}
+		try { CitationLoader.Load(new URL("file:///Users/Adrian/Documents/Source Code/laughing-octo-archer/bin/net/hlw5a/TinMan/Citations/")); }
+		catch (MalformedURLException e1) { e1.printStackTrace(); }
 		
 		tableModel = new TMTableModel();
 		TableRowSorter<TMTableModel> tableSorter = new TableRowSorter<TMTableModel>(tableModel);
@@ -52,7 +48,7 @@ public class TinMan extends JPanel implements Runnable, ListSelectionListener {
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("Citation styles");
 		menuBar.add(menu);
-		Iterator<ICitation> iter = CitationLoader.getCitationStyles().iterator();
+		Iterator<ICitation> iter = CitationLoader.getCitationStyles();
 		while (iter.hasNext()) {
 			JMenuItem  menuItem = new JMenuItem(iter.next().getName());
 			menu.add(menuItem);
@@ -74,7 +70,7 @@ public class TinMan extends JPanel implements Runnable, ListSelectionListener {
 	public void valueChanged(ListSelectionEvent arg0) {
 		if (arg0.getValueIsAdjusting()) {
 			JTable table = tablePane.getTable();
-			AbstractDocument doc = Database.getInstance().getDocument((Integer)table.getValueAt(table.getSelectedRow(), 0));
+			IDocument doc = Database.getInstance().getDocument((Integer)table.getValueAt(table.getSelectedRow(), 0));
 			JPanel lastDetailPane = TMDetailFactory.getLastPanel();
 			JPanel detailPane = TMDetailFactory.createDocumentDetails(doc);
 			if (lastDetailPane != detailPane) contentPane.remove(lastDetailPane);

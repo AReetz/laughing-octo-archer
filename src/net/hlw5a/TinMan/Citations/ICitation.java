@@ -1,10 +1,10 @@
 package net.hlw5a.TinMan.Citations;
 
-import net.hlw5a.TinMan.Documents.ConferenceProceedings;
+import net.hlw5a.TinMan.Documents.IDocument;
 
 public interface ICitation {
 	
-	public String createCitation(ConferenceProceedings document);
-	public String createShortCitation(ConferenceProceedings document);
+	public String createCitation(IDocument document);
+	public String createShortCitation(IDocument document);
 	public String getName();
 }

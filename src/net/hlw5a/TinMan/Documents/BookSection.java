@@ -1,29 +1,44 @@
 package net.hlw5a.TinMan.Documents;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
 
-import net.hlw5a.TinMan.Contributor.Person;
-import net.hlw5a.TinMan.Contributor.Publisher;
-import net.hlw5a.TinMan.Database.DBBool;
+import net.hlw5a.TinMan.Contributor.IPerson;
+import net.hlw5a.TinMan.Contributor.IPublisher;
 import net.hlw5a.TinMan.IDs.ISBN;
 
 public class BookSection extends AbstractDocument {
 
-    // Mendeley fields
-    public DBBool isFavorite() { return favorite; }
-    public String getNote() { return note; }
-    // people fields
-    public List<Person> getAuthors() { return Collections.unmodifiableList(authors); }
-    public List<Person> getEditors() { return Collections.unmodifiableList(editors); }
-    public Publisher getPublisher() { return publisher; }
+	// contributor fields
+	@Override
+	public Iterator<IPerson> getAuthors() { return authors.iterator(); }
+    @Override
+	public Iterator<IPerson> getEditors() { return editors.iterator(); }
+    @Override
+    public IPublisher getPublisher() { return publisher; }
+    
     // date fields
+    @Override
+    public Integer getDay() { throw new UnsupportedOperationException("getDay() not supported in " + this.getClass().getName()); }
+    @Override
+    public Integer getMonth() { throw new UnsupportedOperationException("getMonth() not supported in " + this.getClass().getName()); }
+    @Override
     public Integer getYear() { return year; }
+
     // title fields
-    public String getTitle() { return title; }
-    public String getPages() { return pages; }
+    @Override
     public String getPublication() { return publication; }
+    @Override
+	public String getVolume() { throw new UnsupportedOperationException("getVolume() not supported in " + this.getClass().getName()); }
+    @Override
+	public String getIssue() { throw new UnsupportedOperationException("getIssue() not supported in " + this.getClass().getName()); }
+    @Override
+	public String getEdition() { return edition; }
+    @Override
+    public String getTitle() { return title; }
+    @Override
+    public String getPages() { return pages; }
+	    
     // id fields
     public ISBN getISBN() { return isbn; }
 

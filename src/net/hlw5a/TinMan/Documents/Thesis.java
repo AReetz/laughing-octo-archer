@@ -5,15 +5,14 @@ import java.util.Map;
 
 import net.hlw5a.TinMan.Contributor.IPerson;
 import net.hlw5a.TinMan.Contributor.IPublisher;
-import net.hlw5a.TinMan.IDs.ISBN;
 
-public class Book extends AbstractDocument {
+public class Thesis extends AbstractDocument {
 
 	// contributor fields
 	@Override
 	public Iterator<IPerson> getAuthors() { return authors.iterator(); }
     @Override
-	public Iterator<IPerson> getEditors() { return editors.iterator(); }
+	public Iterator<IPerson> getEditors() { throw new UnsupportedOperationException("getEditors() not supported in " + this.getClass().getName()); }
     @Override
     public IPublisher getPublisher() { return publisher; }
     
@@ -27,22 +26,21 @@ public class Book extends AbstractDocument {
 
     // title fields
     @Override
-    public String getPublication() { return title; }
+    public String getPublication() { throw new UnsupportedOperationException("getPublication() not supported in " + this.getClass().getName()); }
     @Override
 	public String getVolume() { throw new UnsupportedOperationException("getVolume() not supported in " + this.getClass().getName()); }    
     @Override
 	public String getIssue() { throw new UnsupportedOperationException("getIssue() not supported in " + this.getClass().getName()); }
     @Override
-	public String getEdition() { return edition; }
+	public String getEdition() { throw new UnsupportedOperationException("getEdition() not supported in " + this.getClass().getName()); }
     @Override
     public String getTitle() { return title; }
     @Override
     public String getPages() { return pages; }
     
     // id fields
-    public ISBN getISBN() { return isbn; }
 
-    public Book(Map<String, Object> Values)  {
+    public Thesis(Map<String, Object> Values)  {
     	super(Values);
     }
 

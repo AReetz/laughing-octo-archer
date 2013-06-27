@@ -3,7 +3,7 @@ package net.hlw5a.TinMan.Database;
 import java.util.Iterator;
 import java.util.Vector;
 
-import net.hlw5a.TinMan.Contributor.Person;
+import net.hlw5a.TinMan.Contributor.IPerson;
 import net.hlw5a.TinMan.Documents.ConferenceProceedings;
 import net.hlw5a.TinMan.Documents.AbstractDocument;
 import net.hlw5a.TinMan.Documents.JournalArticle;
@@ -56,10 +56,10 @@ public class DatabaseAdaptor {
 		return data;
 	}
 	
-	private static String convertContributors(Iterator<Person> contributors) {
+	private static String convertContributors(Iterator<IPerson> contributors) {
 		StringBuilder result = new StringBuilder();
 		while (contributors.hasNext()) {
-			Person cont = contributors.next();
+			IPerson cont = contributors.next();
 			result.append(cont.getLastName() + ", " + cont.getFirstNames());
 			if (contributors.hasNext()) result.append("; ");
 		}

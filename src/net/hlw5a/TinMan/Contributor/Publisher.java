@@ -1,12 +1,12 @@
 package net.hlw5a.TinMan.Contributor;
 
-public class Publisher {
+public class Publisher implements IPublisher {
 
 	private String name;
 	private Address address;
 	
     public String getName() { return name; }
-    public Address getAddress() { return address; }
+    public String getAddress() { return address.toString(); }
 
     public Publisher(String Name, String Address) {
         this.name = Name;
